@@ -1,0 +1,72 @@
+{
+  "name": "snipcast",
+  "version": "0.0.1",
+  "description": "Convert Markdown snippets into beautiful, animated code-typing videos.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "snipcast": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "remotion",
+    "video",
+    "code",
+    "markdown",
+    "typing",
+    "shiki",
+    "animation"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Code-Hive-Colombia/snipcast.git"
+  },
+  "homepage": "https://github.com/Code-Hive-Colombia/snipcast#readme",
+  "bugs": {
+    "url": "https://github.com/Code-Hive-Colombia/snipcast/issues"
+  },
+  "contributors": [
+    {
+      "name": "null-d-e-v"
+    },
+    {
+      "name": "devplague"
+    }
+  ],
+  "scripts": {
+    "dev": "bun src/index.ts",
+    "build": "bun build src/index.ts --bundle --target=node --outfile=dist/index.js --external remotion --external @remotion/* --external react --external react-dom --external shiki --external canvas --external fs-extra --external commander --external ora --external chalk --external gray-matter --external remark --external remark-parse",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/fs-extra": "^11.0.4",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3"
+  },
+  "peerDependencies": {
+    "typescript": "5"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.402",
+    "@remotion/cli": "^4.0.402",
+    "@remotion/renderer": "^4.0.402",
+    "@remotion/web-renderer": "^4.0.402",
+    "canvas": "^3.2.0",
+    "chalk": "5.6.2",
+    "commander": "14.0.2",
+    "fs-extra": "11.3.3",
+    "gray-matter": "4.0.3",
+    "ora": "9.0.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "remark": "15.0.1",
+    "remark-parse": "11.0.0",
+    "remotion": "^4.0.402",
+    "shiki": "^3.20.0",
+    "zod": "4.3.5"
+  }
+}
