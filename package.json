@@ -1,6 +1,6 @@
 {
   "name": "snipcast",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Convert Markdown snippets into beautiful, animated code-typing videos.",
   "type": "module",
   "main": "./dist/index.js",
@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "dev": "bun src/index.ts",
-    "build": "bun build src/index.ts --bundle --target=node --outfile=dist/index.js --external remotion --external @remotion/* --external react --external react-dom --external shiki --external canvas --external fs-extra --external commander --external ora --external chalk --external gray-matter --external remark --external remark-parse",
+    "build": "bun build src/index.ts --bundle --target=node --outfile=dist/index.js --external remotion --external @remotion/* --external react --external react-dom --external shiki --external canvas --external fs-extra --external commander --external ora --external chalk --external gray-matter --external remark --external remark-parse && mkdir -p dist/remotion && cp -r src/remotion/* dist/remotion/",
     "prepare": "npm run build"
   },
   "devDependencies": {

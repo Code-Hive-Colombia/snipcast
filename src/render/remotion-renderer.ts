@@ -21,6 +21,11 @@ export type RenderConfig = {
   themeCss?: string;
 };
 
+import { fileURLToPath } from "url";
+import fs from "fs-extra";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export async function renderWithRemotion(
   frames: Frame[],
   outFile: string,
@@ -28,6 +33,18 @@ export async function renderWithRemotion(
   spinner: Ora
 ) {
   const baseText = spinner.text;
+
+  // Resolve Remotion entry point
+  // 1. In dist folder (when running bundled/installed globally)
+  // 2. In src folder (when running dev)
+  const prodPath = path.resolve(__dirname, "remotion/index.ts");
+  const devPath = path.resolve(__dirname, "../remotion/index.ts"); // relative to src/render
+
+  const entryPoint = fs.existsSync(prodPath) ? prodPath : devPath;
+
+  if (!fs.existsSync(entryPoint)) {
+    throw new Error(`Could not find Remotion entry point at ${entryPoint}`);
+  }
 
   const browserExecutable = config.browserExecutable || "chrome-headless-shell/linux/chs";
 
@@ -47,7 +64,7 @@ export async function renderWithRemotion(
 
   spinner.text = baseText;
 
-  const serveUrl = await bundle({ entryPoint: "src/remotion/index.ts" });
+  const serveUrl = await bundle({ entryPoint });
   const compositionId = "CodeVideo";
 
   const inputProps = {
